@@ -1,0 +1,80 @@
+aid: sleuth
+name: Sleuth
+review:
+  question: Does Sleuth expose a documented public WebSocket or realtime streaming API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Sleuth's only event-driven surface is an
+    outbound webhook automation action (Sleuth POSTs to a URL you own). That is
+    a request/response HTTP callback, not a persistent stream the client
+    subscribes to, and Sleuth publishes no SSE or WebSocket endpoint. No
+    streaming transport exists to model.
+findings:
+  summary: |
+    Sleuth does not publish a documented public WebSocket or realtime streaming
+    API. The platform exposes a REST registration API under
+    https://app.sleuth.io/api/1 (deploy registration, manual change
+    registration, custom metric impact, custom incident impact) and a GraphQL
+    API at https://app.sleuth.io/graphql (Sleuth's primary public API, with a
+    GraphiQL explorer). Event delivery to external systems is handled by an
+    outbound webhook automation action that sends a signed HTTP POST; this is a
+    one-shot callback, not a bidirectional or subscribe-based stream. No ws:// or
+    wss:// endpoint and no Server-Sent Events surface is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://app.sleuth.io/api/1
+      documented: true
+    - protocol: GraphQL
+      scheme: https
+      baseURL: https://app.sleuth.io/graphql
+      documented: true
+      note: Sleuth's primary public API; same API used internally, with a GraphiQL explorer.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound HTTP POST automation action signed with X-SLEUTH-TIMESTAMP and X-SLEUTH-SIGNATURE; one-shot callback, not a stream.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Sleuth API or automations documentation as of the review date.
+  endpointsConfirmedRest:
+    - POST https://app.sleuth.io/api/1/deployments/{org_slug}/{deployment_slug}/register_deploy
+    - POST https://app.sleuth.io/api/1/deployments/{org_slug}/{project_slug}/register_manual_deploy
+    - POST https://app.sleuth.io/api/1/impact/{impact_id}/register_impact
+    - POST https://app.sleuth.io/api/1/deployments/{org_slug}/{project_slug}/{environment_slug}/{impact_source_slug}/register_impact/{api_key}
+    - POST https://app.sleuth.io/graphql
+  authentication:
+    - scheme: API key
+      header: 'Authorization: apikey <APIKEY>'
+      note: Organization or scoped Access Token. Deploy registration also accepts a Bearer token form. Incident impact appends the API key to the URL path.
+sources:
+  - url: https://help.sleuth.io/sleuth-dora/sleuth-api
+    type: APIReference
+    note: Describes the GraphQL API at app.sleuth.io/graphql plus REST registration endpoints; no WebSocket mentioned.
+  - url: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
+    type: Documentation
+    note: POST register_deploy with sha and optional metadata; HTTPS REST.
+  - url: https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change
+    type: Documentation
+    note: POST register_manual_deploy; HTTPS REST.
+  - url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration
+    type: Documentation
+    note: POST register_impact with a float value; throttled to one per 120 seconds per source.
+  - url: https://help.sleuth.io/sleuth-dora/sleuth-automations/actions/webhook
+    type: Documentation
+    note: Outbound webhook POST with signature headers; not a client-subscribed stream.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists. The only event-driven
+    capability is an outbound, signed webhook callback, which is documented in
+    apis.yml as a Webhook Actions API rather than modeled as AsyncAPI, since it
+    is not a streaming transport.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

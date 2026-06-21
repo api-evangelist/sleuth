@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sleuth Deployment & Impact Registration API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "apikey {{apiKey}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a code deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/deployments/{{orgSlug}}/{{deploymentSlug}}/register_deploy",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"sha\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tags\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Registers a code deployment against a project deployment and environment by git SHA."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Manual Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a manual change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/deployments/{{orgSlug}}/{{projectSlug}}/register_manual_deploy",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"author\": \"<string>\",\n  \"email\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Registers a non-code, free-form manual change against a project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Impact",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a custom metric impact value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/impact/{{impactId}}/register_impact",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"value\": 0.0,\n  \"date\": \"<iso-8601>\"\n}"
+            }
+          },
+          "docs": "Registers a custom metric impact value (float) against an impact source."
+        },
+        {
+          "info": {
+            "name": "Register a custom incident impact event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/deployments/{{orgSlug}}/{{projectSlug}}/{{environmentSlug}}/{{impactSourceSlug}}/register_impact/{{apiKey}}",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"type\": \"triggered\",\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"url\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Registers a custom incident impact event (triggered, resolved, reopened)."
+        }
+      ]
+    }
+  ]
+}

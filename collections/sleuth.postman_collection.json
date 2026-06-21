@@ -1,0 +1,321 @@
+{
+  "item": [
+    {
+      "id": "a1b2c3d4-0001-4a00-9000-000000000001",
+      "name": "Deployments",
+      "description": {
+        "content": "Deploy registration endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1b2c3d4-0001-4a00-9000-000000000011",
+          "name": "Register a code deployment",
+          "request": {
+            "name": "Register a code deployment",
+            "description": {
+              "content": "Registers a code deployment against a project deployment and environment by git SHA. Environment defaults to the project default if omitted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deployments",
+                ":org_slug",
+                ":deployment_slug",
+                "register_deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "org_slug",
+                  "value": "<string>"
+                },
+                {
+                  "key": "deployment_slug",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "apikey {{apiKey}}"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sha\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tags\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a1b2c3d4-0001-4a00-9000-000000000002",
+      "name": "Manual Changes",
+      "description": {
+        "content": "Manual change registration endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1b2c3d4-0001-4a00-9000-000000000021",
+          "name": "Register a manual change",
+          "request": {
+            "name": "Register a manual change",
+            "description": {
+              "content": "Registers a non-code, free-form manual change against a project. The api_key may be in the Authorization header or the body, but not both.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deployments",
+                ":org_slug",
+                ":project_slug",
+                "register_manual_deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "org_slug",
+                  "value": "<string>"
+                },
+                {
+                  "key": "project_slug",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "apikey {{apiKey}}"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"author\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a1b2c3d4-0001-4a00-9000-000000000003",
+      "name": "Impact",
+      "description": {
+        "content": "Custom metric and incident impact registration endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1b2c3d4-0001-4a00-9000-000000000031",
+          "name": "Register a custom metric impact value",
+          "request": {
+            "name": "Register a custom metric impact value",
+            "description": {
+              "content": "Registers a custom metric impact value (float) against an impact source. Limited to one value every 120 seconds per source; no backfilling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "impact",
+                ":impact_id",
+                "register_impact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "impact_id",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "apikey {{apiKey}}"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": 0.0,\n  \"date\": \"<iso-8601>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1b2c3d4-0001-4a00-9000-000000000032",
+          "name": "Register a custom incident impact event",
+          "request": {
+            "name": "Register a custom incident impact event",
+            "description": {
+              "content": "Registers a custom incident impact event (triggered, resolved, reopened). The API key is appended to the URL path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "deployments",
+                ":org_slug",
+                ":project_slug",
+                ":environment_slug",
+                ":impact_source_slug",
+                "register_impact",
+                ":api_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "org_slug",
+                  "value": "<string>"
+                },
+                {
+                  "key": "project_slug",
+                  "value": "<string>"
+                },
+                {
+                  "key": "environment_slug",
+                  "value": "<string>"
+                },
+                {
+                  "key": "impact_source_slug",
+                  "value": "<string>"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{apiKey}}"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"triggered\",\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.sleuth.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "apikey {{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a1b2c3d4-0001-4a00-9000-0000000000aa",
+    "name": "Sleuth Deployment & Impact Registration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sleuth REST registration API for DORA metrics: deploy registration, manual change registration, and custom metric/incident impact.\n\nContact Support:\n Name: Sleuth Support\n Email: support@sleuth.io",
+      "type": "text/plain"
+    }
+  }
+}

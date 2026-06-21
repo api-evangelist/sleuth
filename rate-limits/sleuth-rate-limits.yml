@@ -1,0 +1,68 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Sleuth
+providerId: sleuth
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- DORA
+- DevOps
+- Deployment Tracking
+- Engineering Metrics
+- Continuous Delivery
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Sleuth's registration API applies endpoint-specific throttling. The custom
+  metric impact registration endpoint is documented as accepting at most one
+  value every 120 seconds per impact source, and rejects timestamps that
+  predate the impact source's creation (no backfilling). Other registration
+  endpoints (deploy, manual change, incident impact) and the GraphQL surface do
+  not publish explicit numeric limits; verify any account-level limits with
+  Sleuth during reconciliation.
+notes: >-
+  Only the documented per-source impact cadence is reconciled here. Confirm
+  deploy/manual-change/GraphQL limits with Sleuth support; the GraphQL API is
+  noted by Sleuth as under active development and subject to change.
+sources:
+- https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration
+- https://help.sleuth.io/sleuth-dora/sleuth-api
+responseCodes:
+  throttled: 429
+limits:
+- name: Custom Metric Impact Cadence
+  scope: impact_source
+  metric: requests
+  limit: 1 per 120 seconds
+  notes: At most one metric value may be registered every 120 seconds per impact source.
+- name: Impact Backfill Restriction
+  scope: impact_source
+  metric: timestamp
+  limit: no dates before impact source creation
+  notes: Registered dates may not predate the creation of the impact source.
+- name: Deploy Registration
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No explicit numeric limit published for deploy registration.
+- name: Manual Change Registration
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No explicit numeric limit published for manual change registration.
+- name: GraphQL API
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: GraphQL surface is under active development; limits not published.
+policies:
+- name: Per-Source Throttle
+  description: Custom metric impact values are capped to one every 120 seconds per source.
+- name: Backoff Strategy
+  description: Clients should honor 429 responses and implement exponential backoff with jitter.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

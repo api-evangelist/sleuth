@@ -1,0 +1,103 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Sleuth
+providerId: sleuth
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- DORA
+- DevOps
+- Deployment Tracking
+- Engineering Metrics
+- Continuous Delivery
+- Plans
+description: >-
+  Sleuth's DORA metrics product is priced per developer per month, with a free
+  tier for small teams and a paid Team plan that adds advanced DORA metrics,
+  incident tracking, and notifications. Enterprise pricing is custom and
+  negotiated with sales. The API (deploy registration, manual change, impact,
+  GraphQL, webhooks) is included with the platform and is not separately
+  metered. Verify current tier names and prices on the Sleuth pricing page.
+notes: >-
+  Per-developer prices observed via third-party pricing trackers and Sleuth's
+  pricing/announcement pages; Sleuth has been repositioning toward its newer
+  "Skills" product, so confirm the DORA plan structure directly during
+  reconciliation.
+sources:
+- https://www.sleuth.io/pricing/
+- https://help.sleuth.io/sleuth-dora/sleuth-api
+plans:
+- id: sleuth-free
+  name: Free
+  type: free
+  description: >-
+    Free DORA metrics for small teams, including deployment tracking and core
+    accelerate metrics. Reported as free for up to 10 developers.
+  entries:
+  - label: Developers
+    name: developers_free
+    type: flat
+    metric: developers
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: true
+  elements:
+  - name: Deployment Tracking
+  - name: Core DORA Metrics
+  - name: Deploy Registration API
+  - name: Manual Change API
+- id: sleuth-team
+  name: Team
+  type: paid
+  description: >-
+    Per-developer paid plan adding advanced DORA metrics, incident tracking,
+    impact sources, and Slack notifications. Reported around $25 per developer
+    per month.
+  entries:
+  - label: Per Developer
+    name: team_per_developer
+    type: flat
+    metric: developers
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~$25 per developer / month
+    userMultiplied: true
+  elements:
+  - name: Advanced DORA Metrics
+  - name: Incident Tracking
+  - name: Impact Sources
+  - name: Slack Notifications
+  - name: Webhook Automations
+  - name: GraphQL API
+- id: sleuth-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom pricing for larger organizations with SSO/SAML, advanced security,
+    on-premise GitHub support, and dedicated support. Contact Sleuth sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: SAML SSO
+  - name: On-Premise GitHub Support
+  - name: Custom Billing
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
