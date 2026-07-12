@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sleuth-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Sleuth Access Token / organization API key supplied as "Authorization: apikey
+    <APIKEY>". A Bearer token form ("Authorization: Bearer <ACCESS_TOKEN>") is also accepted
+    for deploy registration. Scoped Access Tokens are managed under Organization Settings >
+    Access Tokens.'
+  sources:
+  - openapi/sleuth-openapi.yml
