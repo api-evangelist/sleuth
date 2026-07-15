@@ -117,6 +117,8 @@ apis:
     JSON deployment payload to a URL of your choosing, signed with X-SLEUTH-TIMESTAMP
     and X-SLEUTH-SIGNATURE headers (Slack-style verification using your org API key).
 common:
+- type: AgenticAccess
+  url: agentic-access/sleuth-agentic-access.yml
 - type: TrustCenter
   url: security/sleuth-trust-center.yml
 - type: DomainSecurity
