@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Sleuth Deployment & Impact Registration Deployments Manual Changes API
+  description: The Sleuth registration API is a REST API used to push software delivery events into Sleuth so it can compute DORA metrics (deploy frequency, lead time, change failure rate, and time to restore). It covers code deploy registration, free-form manual change registration, custom metric impact values, and custom incident impact events. Sleuth's broader public API is a GraphQL surface at https://app.sleuth.io/graphql. Requests authenticate with an organization or scoped Access Token API key.
+  termsOfService: https://www.sleuth.io/terms
+  contact:
+    name: Sleuth Support
+    email: support@sleuth.io
+  version: '1'
+servers:
+- url: https://app.sleuth.io/api/1
+  description: Sleuth REST registration API
+security:
+- apiKeyAuth: []
+tags:
+- name: Manual Changes
+paths:
+  /deployments/{org_slug}/{project_slug}/register_manual_deploy:
+    post:
+      operationId: registerManualChange
+      tags:
+      - Manual Changes
+      summary: Register a manual change
+      description: Registers a non-code, free-form manual change (feature flag flip, infrastructure change, config update, etc.) against a project so it appears on the deploy timeline. The api_key may be supplied in the Authorization header or in the request body, but not both.
+      parameters:
+      - name: org_slug
+        in: path
+        required: true
+        description: URL-safe slug of your Sleuth organization.
+        schema:
+          type: string
+      - name: project_slug
+        in: path
+        required: true
+        description: URL-safe slug of the project to register the change against.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterManualChangeRequest'
+      responses:
+        '200':
+          description: Manual change registered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '401':
+          description: Missing or invalid API key.
+      security:
+      - apiKeyAuth: []
+components:
+  schemas:
+    RegisterManualChangeRequest:
+      type: object
+      required:
+      - name
+      properties:
+        api_key:
+          type: string
+          description: API key, if not supplied via the Authorization header.
+        name:
+          type: string
+          description: Title for the manual change.
+        description:
+          type: string
+          description: Optional free-form description of the change.
+        environment:
+          type: string
+          description: Environment slug; defaults to the project default.
+        tags:
+          type: string
+          description: Comma-separated tags to attach to the change.
+        author:
+          type: string
+          description: Name of the author of the change.
+        email:
+          type: string
+          description: Email of the author of the change.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Sleuth Access Token / organization API key supplied as "Authorization: apikey <APIKEY>". A Bearer token form ("Authorization: Bearer <ACCESS_TOKEN>") is also accepted for deploy registration. Scoped Access Tokens are managed under Organization Settings > Access Tokens.'
