@@ -7,7 +7,20 @@ description: Sleuth is a deployment-based DORA metrics platform that tracks soft
   impact values through Sleuth's REST registration API and GraphQL surface, then
   Sleuth computes the four DORA metrics (deploy frequency, lead time, change
   failure rate, and mean time to recovery) across projects and environments.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sleuth.png
 tags:
 - DORA
 - DevOps
@@ -18,74 +31,6 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: sleuth:deployments-registration
-  name: Sleuth Deployments Registration API
-  tags:
-  - Deployments
-  - Registration
-  - Code Changes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
-  baseURL: https://app.sleuth.io/api/1
-  properties:
-  - url: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
-    type: Documentation
-  - url: https://help.sleuth.io/sleuth-dora/sleuth-api
-    type: APIReference
-  - url: openapi/sleuth-openapi.yml
-    type: OpenAPI
-  - url: collections/sleuth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sleuth.opencollection.json
-    type: OpenCollection
-  description: Registers code deployments against a project's deployment and
-    environment by git SHA, with optional branch, tags, links, commits, files,
-    and pull request metadata, so Sleuth can compute deploy frequency and lead
-    time.
-- aid: sleuth:manual-change-registration
-  name: Sleuth Manual Change API
-  tags:
-  - Manual Changes
-  - Change Sources
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change
-  baseURL: https://app.sleuth.io/api/1
-  properties:
-  - url: https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change
-    type: Documentation
-  - url: openapi/sleuth-openapi.yml
-    type: OpenAPI
-  - url: collections/sleuth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sleuth.opencollection.json
-    type: OpenCollection
-  description: Registers non-code, free-form manual changes (such as feature
-    flag flips, infrastructure changes, or config updates) against a project so
-    they appear on the Sleuth deploy timeline and factor into DORA metrics.
-- aid: sleuth:metric-impact
-  name: Sleuth Metric and Incident Impact API
-  tags:
-  - Impact
-  - Metrics
-  - Incidents
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration
-  baseURL: https://app.sleuth.io/api/1
-  properties:
-  - url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration
-    type: Documentation
-  - url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-incident-impact-registration
-    type: APIReference
-  - url: openapi/sleuth-openapi.yml
-    type: OpenAPI
-  - url: collections/sleuth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/sleuth.opencollection.json
-    type: OpenCollection
-  description: Registers custom metric impact values (floats) and custom incident
-    impact events (triggered, resolved, reopened) against an impact source so
-    Sleuth can run anomaly detection and grade deploy health and change failure
-    rate.
 - aid: sleuth:graphql
   name: Sleuth GraphQL API
   tags:
@@ -98,9 +43,9 @@ apis:
   properties:
   - url: https://help.sleuth.io/sleuth-dora/sleuth-api
     type: Documentation
-  description: Sleuth's primary public API, built on GraphQL - the same API
-    Sleuth uses internally - for managing projects, environments, deployments,
-    and metrics, with an interactive GraphiQL explorer at the endpoint.
+  description: >-
+    Sleuth's primary public API, built on GraphQL - the same API Sleuth uses internally - for managing
+    projects, environments, deployments, and metrics, with an interactive GraphiQL explorer at the endpoint.
 - aid: sleuth:webhooks
   name: Sleuth Webhook Actions
   tags:
@@ -113,9 +58,82 @@ apis:
   properties:
   - url: https://help.sleuth.io/sleuth-dora/sleuth-automations/actions/webhook
     type: Documentation
-  description: Outbound webhook automation action that sends an HTTP POST with a
-    JSON deployment payload to a URL of your choosing, signed with X-SLEUTH-TIMESTAMP
-    and X-SLEUTH-SIGNATURE headers (Slack-style verification using your org API key).
+  description: >-
+    Outbound webhook automation action that sends an HTTP POST with a JSON deployment payload to a URL
+    of your choosing, signed with X-SLEUTH-TIMESTAMP and X-SLEUTH-SIGNATURE headers (Slack-style verification
+    using your org API key).
+- aid: sleuth:sleuth-deployments-api
+  name: Sleuth Deployments API
+  description: The Deployments API from Sleuth — 1 operation(s) for deployments.
+  humanURL: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
+  baseURL: https://app.sleuth.io/api/1
+  tags:
+  - Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/sleuth-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
+  - type: APIReference
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api
+  - type: PostmanCollection
+    url: collections/sleuth.postman_collection.json
+  - type: OpenCollection
+    url: collections/sleuth.opencollection.json
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration
+  - type: APIReference
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-incident-impact-registration
+- aid: sleuth:sleuth-impact-api
+  name: Sleuth Impact API
+  description: The Impact API from Sleuth — 2 operation(s) for impact.
+  humanURL: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
+  baseURL: https://app.sleuth.io/api/1
+  tags:
+  - Impact
+  properties:
+  - type: OpenAPI
+    url: openapi/sleuth-impact-api-openapi.yml
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
+  - type: APIReference
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api
+  - type: PostmanCollection
+    url: collections/sleuth.postman_collection.json
+  - type: OpenCollection
+    url: collections/sleuth.opencollection.json
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration
+  - type: APIReference
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-incident-impact-registration
+- aid: sleuth:sleuth-manual-changes-api
+  name: Sleuth Manual Changes API
+  description: The Manual Changes API from Sleuth — 1 operation(s) for manual changes.
+  humanURL: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
+  baseURL: https://app.sleuth.io/api/1
+  tags:
+  - Manual Changes
+  properties:
+  - type: OpenAPI
+    url: openapi/sleuth-manual-changes-api-openapi.yml
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
+  - type: APIReference
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api
+  - type: PostmanCollection
+    url: collections/sleuth.postman_collection.json
+  - type: OpenCollection
+    url: collections/sleuth.opencollection.json
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change
+  - type: Documentation
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration
+  - type: APIReference
+    url: https://help.sleuth.io/sleuth-dora/sleuth-api/custom-incident-impact-registration
 common:
 - type: AgenticAccess
   url: agentic-access/sleuth-agentic-access.yml
