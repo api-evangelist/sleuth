@@ -1,0 +1,325 @@
+openapi: 3.0.1
+info:
+  title: Sleuth Deployment & Impact Registration API
+  description: >-
+    The Sleuth registration API is a REST API used to push software delivery
+    events into Sleuth so it can compute DORA metrics (deploy frequency, lead
+    time, change failure rate, and time to restore). It covers code deploy
+    registration, free-form manual change registration, custom metric impact
+    values, and custom incident impact events. Sleuth's broader public API is a
+    GraphQL surface at https://app.sleuth.io/graphql. Requests authenticate with
+    an organization or scoped Access Token API key.
+  termsOfService: https://www.sleuth.io/terms
+  contact:
+    name: Sleuth Support
+    email: support@sleuth.io
+  version: '1'
+servers:
+  - url: https://app.sleuth.io/api/1
+    description: Sleuth REST registration API
+paths:
+  /deployments/{org_slug}/{deployment_slug}/register_deploy:
+    post:
+      operationId: registerDeploy
+      tags:
+        - Deployments
+      summary: Register a code deployment
+      description: >-
+        Registers a code deployment against a project's deployment and
+        environment by git SHA. If environment is omitted, the project's default
+        environment is used. The JSON schema is published at
+        https://app.sleuth.io/api/1/schema/register_deploy.
+      parameters:
+        - name: org_slug
+          in: path
+          required: true
+          description: URL-safe slug of your Sleuth organization.
+          schema:
+            type: string
+        - name: deployment_slug
+          in: path
+          required: true
+          description: URL-safe slug of the project deployment to register against.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDeployRequest'
+      responses:
+        '200':
+          description: Deploy registered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '401':
+          description: Missing or invalid Access Token.
+      security:
+        - apiKeyAuth: []
+  /deployments/{org_slug}/{project_slug}/register_manual_deploy:
+    post:
+      operationId: registerManualChange
+      tags:
+        - Manual Changes
+      summary: Register a manual change
+      description: >-
+        Registers a non-code, free-form manual change (feature flag flip,
+        infrastructure change, config update, etc.) against a project so it
+        appears on the deploy timeline. The api_key may be supplied in the
+        Authorization header or in the request body, but not both.
+      parameters:
+        - name: org_slug
+          in: path
+          required: true
+          description: URL-safe slug of your Sleuth organization.
+          schema:
+            type: string
+        - name: project_slug
+          in: path
+          required: true
+          description: URL-safe slug of the project to register the change against.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterManualChangeRequest'
+      responses:
+        '200':
+          description: Manual change registered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '401':
+          description: Missing or invalid API key.
+      security:
+        - apiKeyAuth: []
+  /impact/{impact_id}/register_impact:
+    post:
+      operationId: registerMetricImpact
+      tags:
+        - Impact
+      summary: Register a custom metric impact value
+      description: >-
+        Registers a custom metric impact value against an impact source. Sleuth
+        runs anomaly detection on these values to grade deploy health. Limited
+        to one value every 120 seconds per impact source; dates may not predate
+        the impact source creation (no backfilling).
+      parameters:
+        - name: impact_id
+          in: path
+          required: true
+          description: Integer ID that uniquely identifies the Custom Metric Impact Source.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterMetricImpactRequest'
+      responses:
+        '200':
+          description: Metric impact value registered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '401':
+          description: Missing or invalid API key.
+        '429':
+          description: Rate limited - at most one value every 120 seconds per source.
+      security:
+        - apiKeyAuth: []
+  /deployments/{org_slug}/{project_slug}/{environment_slug}/{impact_source_slug}/register_impact/{api_key}:
+    post:
+      operationId: registerIncidentImpact
+      tags:
+        - Impact
+      summary: Register a custom incident impact event
+      description: >-
+        Registers a custom incident impact event (triggered, resolved, or
+        reopened) against a custom incident impact source. The API key is
+        appended to the URL path.
+      parameters:
+        - name: org_slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: project_slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environment_slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: impact_source_slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: api_key
+          in: path
+          required: true
+          description: Organization API key (Settings > Details > Api Key).
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterIncidentImpactRequest'
+      responses:
+        '200':
+          description: Incident impact event registered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '401':
+          description: Missing or invalid API key.
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Sleuth Access Token / organization API key supplied as
+        "Authorization: apikey <APIKEY>". A Bearer token form
+        ("Authorization: Bearer <ACCESS_TOKEN>") is also accepted for deploy
+        registration. Scoped Access Tokens are managed under Organization
+        Settings > Access Tokens.
+  schemas:
+    RegisterDeployRequest:
+      type: object
+      required:
+        - sha
+      properties:
+        sha:
+          type: string
+          description: Git SHA of the commit to register as a deploy.
+        environment:
+          type: string
+          description: Environment slug to register against; defaults to the project default.
+        date:
+          type: string
+          description: ISO-8601 timestamp of the deploy; defaults to the current time.
+        branch:
+          type: string
+          description: Git branch the deploy was made from.
+        tags:
+          type: string
+          description: Comma-separated tags to attach to the deploy.
+        ignore_if_duplicate:
+          type: string
+          description: When set, silently ignores a duplicate SHA instead of erroring.
+        email:
+          type: string
+          description: Email of the author associated with the deploy.
+        links:
+          type: string
+          description: Related links to attach to the deploy.
+        commits:
+          type: array
+          description: Commit objects included in the deploy.
+          items:
+            type: object
+        files:
+          type: array
+          description: Files changed in the deploy.
+          items:
+            type: string
+        pull_requests:
+          type: array
+          description: Pull requests included in the deploy.
+          items:
+            type: object
+    RegisterManualChangeRequest:
+      type: object
+      required:
+        - name
+      properties:
+        api_key:
+          type: string
+          description: API key, if not supplied via the Authorization header.
+        name:
+          type: string
+          description: Title for the manual change.
+        description:
+          type: string
+          description: Optional free-form description of the change.
+        environment:
+          type: string
+          description: Environment slug; defaults to the project default.
+        tags:
+          type: string
+          description: Comma-separated tags to attach to the change.
+        author:
+          type: string
+          description: Name of the author of the change.
+        email:
+          type: string
+          description: Email of the author of the change.
+    RegisterMetricImpactRequest:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: number
+          format: float
+          description: The metric value to register against the impact source.
+        api_key:
+          type: string
+          description: API key, if not supplied via the Authorization header.
+        date:
+          type: string
+          description: ISO-8601 timestamp; defaults to the current time. No backfilling.
+    RegisterIncidentImpactRequest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Incident event type.
+          enum:
+            - triggered
+            - resolved
+            - reopened
+        api_key:
+          type: string
+          description: API key (also appended to the URL path).
+        id:
+          type: string
+          description: Unique incident identifier from your system.
+        date:
+          type: string
+          description: ISO-8601 start timestamp; defaults to the current time.
+        ended_date:
+          type: string
+          description: ISO-8601 timestamp for when the incident ended.
+        title:
+          type: string
+          description: Human-readable incident name.
+        url:
+          type: string
+          description: Link to the incident in your external system.
+security:
+  - apiKeyAuth: []
