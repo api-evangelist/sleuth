@@ -1,0 +1,265 @@
+{
+  "item": [
+    {
+      "id": "572ee0a5-032e-4687-b424-b01d58a54608",
+      "name": "Deployments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87ea8444-c6b0-4ae1-a8b2-4c22a07b6822",
+          "name": "Register a code deployment",
+          "request": {
+            "name": "Register a code deployment",
+            "description": {
+              "content": "Registers a code deployment against a project's deployment and environment by git SHA. If environment is omitted, the project's default environment is used. The JSON schema is published at https://app.sleuth.io/api/1/schema/register_deploy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deployments",
+                ":org_slug",
+                ":deployment_slug",
+                "register_deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_slug",
+                  "description": "(Required) URL-safe slug of your Sleuth organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deployment_slug",
+                  "description": "(Required) URL-safe slug of the project deployment to register against."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sha\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"date\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"ignore_if_duplicate\": \"<string>\",\n  \"email\": \"<string>\",\n  \"links\": \"<string>\",\n  \"commits\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"pull_requests\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba782740-5a02-4aef-b539-94ef267bd15f",
+              "name": "Deploy registered successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments",
+                    ":org_slug",
+                    ":deployment_slug",
+                    "register_deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_slug",
+                      "description": "(Required) URL-safe slug of your Sleuth organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deployment_slug",
+                      "description": "(Required) URL-safe slug of the project deployment to register against."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sha\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"date\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"ignore_if_duplicate\": \"<string>\",\n  \"email\": \"<string>\",\n  \"links\": \"<string>\",\n  \"commits\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"pull_requests\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Success",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5f7b1f7f-b76e-4699-a138-907e117690ae",
+              "name": "Missing or invalid Access Token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments",
+                    ":org_slug",
+                    ":deployment_slug",
+                    "register_deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_slug",
+                      "description": "(Required) URL-safe slug of your Sleuth organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deployment_slug",
+                      "description": "(Required) URL-safe slug of the project deployment to register against."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sha\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"date\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"ignore_if_duplicate\": \"<string>\",\n  \"email\": \"<string>\",\n  \"links\": \"<string>\",\n  \"commits\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"pull_requests\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.sleuth.io/api/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "963363f3-e1bf-4339-91aa-c1225d7d6078",
+    "name": "Sleuth Deployment & Impact Registration Deployments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sleuth registration API is a REST API used to push software delivery events into Sleuth so it can compute DORA metrics (deploy frequency, lead time, change failure rate, and time to restore). It covers code deploy registration, free-form manual change registration, custom metric impact values, and custom incident impact events. Sleuth's broader public API is a GraphQL surface at https://app.sleuth.io/graphql. Requests authenticate with an organization or scoped Access Token API key.\n\nContact Support:\n Name: Sleuth Support\n Email: support@sleuth.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sleuth Deployment & Impact Registration Deployments API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a code deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/deployments/:org_slug/:deployment_slug/register_deploy",
+            "params": [
+              {
+                "name": "org_slug",
+                "value": "",
+                "type": "path",
+                "description": "URL-safe slug of your Sleuth organization."
+              },
+              {
+                "name": "deployment_slug",
+                "value": "",
+                "type": "path",
+                "description": "URL-safe slug of the project deployment to register against."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Registers a code deployment against a project's deployment and environment by git SHA. If environment is omitted, the project's default environment is used. The JSON schema is published at https://app.sleuth.io/api/1/schema/register_deploy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

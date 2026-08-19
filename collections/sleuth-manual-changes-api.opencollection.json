@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sleuth Deployment & Impact Registration Deployments Manual Changes API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manual Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a manual change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/deployments/:org_slug/:project_slug/register_manual_deploy",
+            "params": [
+              {
+                "name": "org_slug",
+                "value": "",
+                "type": "path",
+                "description": "URL-safe slug of your Sleuth organization."
+              },
+              {
+                "name": "project_slug",
+                "value": "",
+                "type": "path",
+                "description": "URL-safe slug of the project to register the change against."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Registers a non-code, free-form manual change (feature flag flip, infrastructure change, config update, etc.) against a project so it appears on the deploy timeline. The api_key may be supplied in the Authorization header or in the request body, but not both."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,265 @@
+{
+  "item": [
+    {
+      "id": "cb4bed24-3d4d-4d5f-bc47-485226d608e9",
+      "name": "Manual Changes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70dfd0d6-bcd1-4eff-bc45-cf983849ab74",
+          "name": "Register a manual change",
+          "request": {
+            "name": "Register a manual change",
+            "description": {
+              "content": "Registers a non-code, free-form manual change (feature flag flip, infrastructure change, config update, etc.) against a project so it appears on the deploy timeline. The api_key may be supplied in the Authorization header or in the request body, but not both.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deployments",
+                ":org_slug",
+                ":project_slug",
+                "register_manual_deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_slug",
+                  "description": "(Required) URL-safe slug of your Sleuth organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_slug",
+                  "description": "(Required) URL-safe slug of the project to register the change against."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"description\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"author\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62d0bf84-d396-414d-800b-e01a46b11124",
+              "name": "Manual change registered successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments",
+                    ":org_slug",
+                    ":project_slug",
+                    "register_manual_deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_slug",
+                      "description": "(Required) URL-safe slug of your Sleuth organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_slug",
+                      "description": "(Required) URL-safe slug of the project to register the change against."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"description\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"author\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Success",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54bb2ba4-fc20-412a-bbe7-e109250031a1",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments",
+                    ":org_slug",
+                    ":project_slug",
+                    "register_manual_deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_slug",
+                      "description": "(Required) URL-safe slug of your Sleuth organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_slug",
+                      "description": "(Required) URL-safe slug of the project to register the change against."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"description\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"author\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.sleuth.io/api/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fb3c748e-21d1-466d-8899-b5e4b6fb601e",
+    "name": "Sleuth Deployment & Impact Registration Deployments Manual Changes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sleuth registration API is a REST API used to push software delivery events into Sleuth so it can compute DORA metrics (deploy frequency, lead time, change failure rate, and time to restore). It covers code deploy registration, free-form manual change registration, custom metric impact values, and custom incident impact events. Sleuth's broader public API is a GraphQL surface at https://app.sleuth.io/graphql. Requests authenticate with an organization or scoped Access Token API key.\n\nContact Support:\n Name: Sleuth Support\n Email: support@sleuth.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sleuth Deployment & Registration Deployments Impact API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Impact",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a custom metric impact value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/impact/:impact_id/register_impact",
+            "params": [
+              {
+                "name": "impact_id",
+                "value": "",
+                "type": "path",
+                "description": "Integer ID that uniquely identifies the Custom Metric Impact Source."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Registers a custom metric impact value against an impact source. Sleuth runs anomaly detection on these values to grade deploy health. Limited to one value every 120 seconds per impact source; dates may not predate the impact source creation (no backfilling)."
+        },
+        {
+          "info": {
+            "name": "Register a custom incident impact event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.sleuth.io/api/1/deployments/:org_slug/:project_slug/:environment_slug/:impact_source_slug/register_impact/:api_key",
+            "params": [
+              {
+                "name": "org_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "project_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environment_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "impact_source_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "path",
+                "description": "Organization API key (Settings > Details > Api Key)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a custom incident impact event (triggered, resolved, or reopened) against a custom incident impact source. The API key is appended to the URL path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
