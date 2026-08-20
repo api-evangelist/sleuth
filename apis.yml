@@ -35,6 +35,10 @@ apis:
   name: Sleuth GraphQL API
   tags:
   - GraphQL
+  - Project
+  - Environments
+  tags_raw:
+  - GraphQL
   - Projects
   - Environments
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
@@ -49,6 +53,10 @@ apis:
 - aid: sleuth:webhooks
   name: Sleuth Webhook Actions
   tags:
+  - Webhook
+  - Automations
+  - Event
+  tags_raw:
   - Webhooks
   - Automations
   - Events
@@ -68,6 +76,8 @@ apis:
   humanURL: https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration
   baseURL: https://app.sleuth.io/api/1
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
