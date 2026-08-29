@@ -7,6 +7,18 @@ description: Sleuth is a deployment-based DORA metrics platform that tracks soft
   impact values through Sleuth's REST registration API and GraphQL surface, then
   Sleuth computes the four DORA metrics (deploy frequency, lead time, change
   failure rate, and mean time to recovery) across projects and environments.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
