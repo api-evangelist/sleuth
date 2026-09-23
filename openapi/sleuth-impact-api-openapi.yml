@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Sleuth Deployment & Registration Deployments Impact API
+  title: Sleuth Deployment & Registration Impact API
   description: The Sleuth registration API is a REST API used to push software delivery events into Sleuth so it can compute DORA metrics (deploy frequency, lead time, change failure rate, and time to restore). It covers code deploy registration, free-form manual change registration, custom metric impact values, and custom incident impact events. Sleuth's broader public API is a GraphQL surface at https://app.sleuth.io/graphql. Requests authenticate with an organization or scoped Access Token API key.
   termsOfService: https://www.sleuth.io/terms
   contact:
@@ -101,21 +101,6 @@ paths:
           description: Missing or invalid API key.
 components:
   schemas:
-    RegisterMetricImpactRequest:
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: number
-          format: float
-          description: The metric value to register against the impact source.
-        api_key:
-          type: string
-          description: API key, if not supplied via the Authorization header.
-        date:
-          type: string
-          description: ISO-8601 timestamp; defaults to the current time. No backfilling.
     RegisterIncidentImpactRequest:
       type: object
       required:
@@ -146,6 +131,21 @@ components:
         url:
           type: string
           description: Link to the incident in your external system.
+    RegisterMetricImpactRequest:
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: number
+          format: float
+          description: The metric value to register against the impact source.
+        api_key:
+          type: string
+          description: API key, if not supplied via the Authorization header.
+        date:
+          type: string
+          description: ISO-8601 timestamp; defaults to the current time. No backfilling.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

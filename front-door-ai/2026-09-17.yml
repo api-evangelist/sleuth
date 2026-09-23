@@ -1,0 +1,32 @@
+# Front Door AI Index — sleuth — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: sleuth
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.sleuth.io
+  final_host: www.sleuth.io
+  ownership: own
+  owner: sleuth
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 30
+  host_score: 30
+  density: 40.05
+  words: 749
+  tiers:
+    agentic: 14
+    core: 10
+    model: 6
+  ambiguous: 15
+  top_terms:
+    agent: 15
+    AI: 10
+    MCP: 6
+    AI agent: 4
+    Claude: 3
+    Gemini: 3
+    copilot: 3
+    prompts: 1
