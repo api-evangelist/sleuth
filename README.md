@@ -1,4 +1,4 @@
-# Sleuth (sleuth)
+# Sleuth
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,129 +66,122 @@
 
 Sleuth is a deployment-based DORA metrics platform that tracks software delivery performance. Teams register deployments, manual changes, and custom impact values through Sleuth's REST registration API and GraphQL surface, then Sleuth computes the four DORA metrics (deploy frequency, lead time, change failure rate, and mean time to recovery) across projects and environments.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/sleuth/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/sleuth/refs/heads/main/apis.yml)
+**Areas:** DORA · DevOps · Deployment Tracking · Engineering Metrics · Continuous Delivery
 
-## Tags
+## Sleuth on APIs.io
 
-- DORA
-- DevOps
-- Deployment Tracking
-- Engineering Metrics
-- Continuous Delivery
+Everything profiled for Sleuth is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sleuth/](https://apis.io/providers/sleuth/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Sleuth GraphQL API](https://apis.io/apis/sleuth/graphql/) — Sleuth's primary public API, built on GraphQL - the same API Sleuth uses internally - for managing projects, environments, deployments, and metrics, with an…
+- [Sleuth Webhook Actions](https://apis.io/apis/sleuth/webhooks/) — Outbound webhook automation action that sends an HTTP POST with a JSON deployment payload to a URL of your choosing, signed with X-SLEUTH-TIMESTAMP and…
+- [Sleuth Deployments API](https://apis.io/apis/sleuth/sleuth-deployments-api/) — The Deployments API from Sleuth — 1 operation(s) for deployments.
+- [Sleuth Impact API](https://apis.io/apis/sleuth/sleuth-impact-api/) — The Impact API from Sleuth — 2 operation(s) for impact.
+- [Sleuth Manual Changes API](https://apis.io/apis/sleuth/sleuth-manual-changes-api/) — The Manual Changes API from Sleuth — 1 operation(s) for manual changes.
 
-## APIs
+### Published properties
 
-### Sleuth Deployments Registration API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Registers code deployments against a project's deployment and environment by git SHA, with optional branch, tags, links, commits, files, and pull request metadata, so Sleuth can compute deploy frequency and lead time.
+#### Agentic access (1)
 
-- **Human URL:** [https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration](https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration)
-- **Base URL:** `https://app.sleuth.io/api/1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Sleuth Agentic Access](https://apis.io/agentic-access/sleuth/sleuth-agentic-access/)
 
-- Deployments
-- Registration
-- Code Changes
+#### Collections (4)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://help.sleuth.io/sleuth-dora/sleuth-api/deploy-registration)
-- [API Reference](https://help.sleuth.io/sleuth-dora/sleuth-api)
-- [OpenAPI](openapi/sleuth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sleuth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sleuth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Sleuth Deployment & Impact Registration API](https://apis.io/collections/sleuth/open-sleuth/)
+- [Sleuth Deployment & Impact Registration Deployments API](https://apis.io/collections/sleuth/open-sleuth-deployments-api/)
+- [Sleuth Deployment & Registration Deployments Impact API](https://apis.io/collections/sleuth/open-sleuth-impact-api/)
+- [Sleuth Deployment & Impact Registration Deployments Manual Changes API](https://apis.io/collections/sleuth/open-sleuth-manual-changes-api/)
 
-### Sleuth Manual Change API
+#### Security (3)
 
-Registers non-code, free-form manual changes (such as feature flag flips, infrastructure changes, or config updates) against a project so they appear on the Sleuth deploy timeline and factor into DORA metrics.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change](https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change)
-- **Base URL:** `https://app.sleuth.io/api/1`
+- [Sleuth Authentication](https://apis.io/security/sleuth/sleuth-authentication/)
+- [Sleuth Domain Security](https://apis.io/security/sleuth/sleuth-domain-security/)
+- [Sleuth Trust Center](https://apis.io/security/sleuth/sleuth-trust-center/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Manual Changes
-- Change Sources
+Published plans, tiers and prices.
 
-#### Properties
+- [Sleuth Plans Pricing](https://apis.io/plans/sleuth/sleuth-plans-pricing/)
 
-- [Documentation](https://help.sleuth.io/sleuth-dora/sleuth-api/manual-change)
-- [OpenAPI](openapi/sleuth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sleuth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sleuth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Sleuth Metric and Incident Impact API
+Published request limits.
 
-Registers custom metric impact values (floats) and custom incident impact events (triggered, resolved, reopened) against an impact source so Sleuth can run anomaly detection and grade deploy health and change failure rate.
+- [Sleuth Rate Limits](https://apis.io/rate-limits/sleuth/sleuth-rate-limits/)
 
-- **Human URL:** [https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration](https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration)
-- **Base URL:** `https://app.sleuth.io/api/1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Impact
-- Metrics
-- Incidents
+- [Sleuth Finops](https://apis.io/finops/sleuth/sleuth-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://help.sleuth.io/sleuth-dora/sleuth-api/custom-metric-impact-registration)
-- [API Reference](https://help.sleuth.io/sleuth-dora/sleuth-api/custom-incident-impact-registration)
-- [OpenAPI](openapi/sleuth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sleuth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sleuth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Sleuth GraphQL API
-
-Sleuth's primary public API, built on GraphQL - the same API Sleuth uses internally - for managing projects, environments, deployments, and metrics, with an interactive GraphiQL explorer at the endpoint.
-
-- **Human URL:** [https://help.sleuth.io/sleuth-dora/sleuth-api](https://help.sleuth.io/sleuth-dora/sleuth-api)
-- **Base URL:** `https://app.sleuth.io/graphql`
-
-#### Tags
-
-- GraphQL
-- Projects
-- Environments
-
-#### Properties
-
-- [Documentation](https://help.sleuth.io/sleuth-dora/sleuth-api)
-
-### Sleuth Webhook Actions
-
-Outbound webhook automation action that sends an HTTP POST with a JSON deployment payload to a URL of your choosing, signed with X-SLEUTH-TIMESTAMP and X-SLEUTH-SIGNATURE headers (Slack-style verification using your org API key).
-
-- **Human URL:** [https://help.sleuth.io/sleuth-dora/sleuth-automations/actions/webhook](https://help.sleuth.io/sleuth-dora/sleuth-automations/actions/webhook)
-- **Base URL:** `https://app.sleuth.io`
-
-#### Tags
-
-- Webhooks
-- Automations
-- Events
-
-#### Properties
-
-- [Documentation](https://help.sleuth.io/sleuth-dora/sleuth-automations/actions/webhook)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/sleuth-io)
-- [LinkedIn](https://www.linkedin.com/company/sleuth-io)
 - [Website](https://www.sleuth.io)
 - [Documentation](https://help.sleuth.io/sleuth-dora/sleuth-api)
-- [Plans](plans/sleuth-plans-pricing.yml)
-- [Rate Limits](rate-limits/sleuth-rate-limits.yml)
-- [Fin Ops](finops/sleuth-finops.yml)
+- [GitHub](https://github.com/sleuth-io)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 52.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 15.8 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sleuth/](https://apis.io/providers/sleuth/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Sleuth: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sleuth/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
